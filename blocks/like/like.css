@@ -1,0 +1,11 @@
+.like{
+  background-color: inherit;
+  background-image: url(../../images/like.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: none;
+  width: 22px;
+  height: 19px;
+  align-self: center
+}
+

@@ -1,0 +1,9 @@
+.place__text{
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1.21;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 195px;
+}

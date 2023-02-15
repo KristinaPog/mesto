@@ -1,0 +1,11 @@
+.place__label {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 21px;
+  background-color: #fff;
+  color: #000;
+  border-radius: 0px 0px 10px 10px;
+  width: 100%;
+  min-height: 79px;
+  box-sizing: border-box;
+}

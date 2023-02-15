@@ -1,0 +1,16 @@
+.popup__container{
+  width: 470px;
+  margin-top: 195px;
+  position: relative;
+  top: 0;
+  right: -20px;
+}
+
+@media (max-width:580px){
+  .popup__container{
+    max-width: 282px;
+    margin-top: 123px;
+    top: 0;
+    right: 0;
+  }
+}
