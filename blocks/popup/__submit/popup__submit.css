@@ -2,7 +2,11 @@
   background-color: #000;
   color: #fff;
   cursor: pointer;
-  margin-top: 45px;
+  margin-top: 16px;
   padding: 14px 0 10px;  
   font-size: 18px;
+}
+
+.popup__submit:hover{
+  opacity: 0.8;
 }

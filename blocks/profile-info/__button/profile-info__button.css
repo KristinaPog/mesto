@@ -20,3 +20,7 @@
     top: 8px;
   }
 }
+
+.profile-info__button:hover{
+  opacity: 0.6;
+}
