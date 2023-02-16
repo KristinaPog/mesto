@@ -1,24 +1,32 @@
-.profile-info{
+.profile-info {
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex;
-  gap: 8px;
+  display: grid;
+  grid-template-areas: 
+  "name edit"
+  "status .";
+  align-items: baseline;
+  gap: 8px 20px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  position: relative;
-  max-width: 336px;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  max-width: 340px;
 }
 
 @media (max-width: 700px) {
-  .profile-info{
+  .profile-info {
     margin-bottom: 32px;
+    gap: 8px 10px;
   }
 }
 
 @media (max-width: 440px) {
-  .profile-info{
-    max-width: 210px;
+  .profile-info {
+    grid-template-areas: 
+    "name"
+    "status";
+    position: relative;
+    max-width: 250px;
   }
 }
