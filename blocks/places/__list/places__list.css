@@ -2,6 +2,7 @@
   padding: 0;
   margin: 0;
   list-style: none;
+  display: -ms-grid;
   display: grid;
   justify-items: center;
   grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));

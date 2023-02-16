@@ -8,7 +8,8 @@
   border: 2px solid #FFFFFF;
   border-radius: 2px;
   margin-left: auto;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 @media (max-width: 700px){

@@ -5,7 +5,8 @@
   line-height: 1.14;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+     text-overflow: ellipsis;
 }
 
 @media (max-width: 700px) {
