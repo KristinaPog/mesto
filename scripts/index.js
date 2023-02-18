@@ -24,9 +24,7 @@ openButton.addEventListener('click', function () {
   jobInput.value = profileStatus.textContent;
 });
 
-closeButton.addEventListener('click', function(){
-  close();
-});
+closeButton.addEventListener('click', close);
 
 
 // Обработчик «отправки» формы, хотя пока
