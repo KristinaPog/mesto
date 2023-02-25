@@ -77,7 +77,7 @@
   <footer class="footer">
     <p class="footer__text">&copy; 2020 Mesto Russia</p>
   </footer>
-  <div class="popup">
+  <!-- <div class="popup">
     <div class="popup__container">
       <button class="popup__close" type="button" aria-label="Закрыть"></button>
       <form action="#" name="popupForm" class="popup__form">
@@ -89,7 +89,47 @@
         <button type="submit" class="popup__submit">Сохранить</button>
       </form>
     </div>
+  </div> -->
+  <div class="popup popup_edit-profile">
+    <div class="popup__container popup__container_edit-profile">
+      <button class="popup__close popup__close_edit-profile" type="button" aria-label="Закрыть"></button>
+      <form action="#" name="popupForm" class="popup__form popup__form_edit-profile">
+        <h3 class="popup__title popup__title_edit-profile">Редактировать профиль</h3>
+        <input type="text" name="profileName" value=" " placeholder="Введите имя"
+          class="popup__input popup__input_type_name" required>
+        <input type="text" name="profileStatus" value=" " placeholder="Введите статус"
+          class="popup__input popup__input_type_status">
+        <button type="submit" class="popup__submit popup__submit_edit-profile">Сохранить</button>
+      </form>
+    </div>
   </div>
+  <div class="popup popup_add-card">
+    <div class="popup__container">
+      <button class="popup__close popup__close_add-card" type="button" aria-label="Закрыть"></button>
+      <form action="#" name="popupForm" class="popup__form popup__form_add-card">
+        <h3 class="popup__title popup__title_add-card">Новое место</h3>
+        <input type="text" name="profileName" value="" placeholder="Название"
+          class="popup__input popup__input_type_place-name" required>
+        <input type="text" name="profileStatus" value="" placeholder="Ссылка на картинку"
+          class="popup__input popup__input_type_place-image">
+        <button type="submit" class="popup__submit popup__submit_add-card">Создать</button>
+      </form>
+    </div>
+  </div>
+  <!-- <div class="popup">
+    <div class="popup__container">
+      <button class="popup__close" type="button" aria-label="Закрыть"></button>
+    </div>
+  </div> -->
+  <template id="place-card">
+    <li class="place">
+      <img src="" alt="" class="place__image">
+      <div class="place__label">
+        <h2 class="place__text"></h2>
+        <button type="button" class="like"></button>
+      </div>
+    </li>
+  </template>
   <script src="scripts/index.js"></script>
 </body>
 

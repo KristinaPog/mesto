@@ -38,6 +38,7 @@
 @import url(../blocks/place/__label/place__label.css);
 @import url(../blocks/place/__text/place__text.css);
 @import url(../blocks/like/like.css);
+@import url(../blocks/like/_active/like_active.css);
 
 /* FOOTER */
 @import url(../blocks/footer/footer.css);
