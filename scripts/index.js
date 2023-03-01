@@ -145,5 +145,11 @@ const initialCards = [
   }
 ]; 
 
+initialCards.forEach(function(card){
+  
+})
+
+
+
 //Обработчик лайков
 
