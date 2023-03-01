@@ -5,6 +5,7 @@ const addPlaceButton = page.querySelector('.profile__button'); //находим 
 // const popup = page.querySelector('.popup'); //попап, общая конструкция
 const popupEditProfile = page.querySelector('.popup_edit-profile'); //попап редактирования имени и статуса
 const popupAddPlace = page.querySelector('.popup_add-card'); //попап добавления карточки
+let placesList = page.querySelector('.places__list');
 
 // Находим поля формы в DOM
 let nameInput = page.querySelector('.popup__input_type_name'); //поле формы редактирования имени
@@ -21,6 +22,8 @@ let popupTitleCard = page.querySelector('.popup__title_add-card'); //Загол�
 const closeButton = page.querySelector('.popup__close'); //кнопка закрытия
 const closeButtonEditProfile = page.querySelector('.popup__close_edit-profile'); //кнопка закрытия редактирования профиля
 const closeButtonAddPlace = page.querySelector('.popup__close_add-card'); //кнопка закрытия добавления места
+const placeTemplate = document.querySelector('#place-card').content;
+const addCardButton = document.querySelector('.popup__submit_add-card');
 
 // Выберите элементы, куда должны быть вставлены значения полей
 let profileName = page.querySelector('.profile-info__name'); //имя пользователя видимое на странице
@@ -55,14 +58,14 @@ editProfileButton.addEventListener('click', function () {
 addPlaceButton.addEventListener('click', function () {
   openPopupAddPlace(); //открываем попап
 });
+
+
+
 // функция добавления нового места
-// const placeTemplate = document.querySelector('#place-card').content;
-// const addCardButton = document.querySelector('.popup__submit_add-card');
+// 
 
 // addCardButton.addEventListener('click', function(){
-//   const placeElement = placeTemplate.querySelector('.place').cloneNode(true);
-//   placeElement.querySelector('.place__image').src = document.querySelector('.popup__input_type_place-image').value;
-//   placeElement.querySelector('.place__text').src = document.querySelector('.popup__input_type_place-name').value;
+//   
 //   close();
 // })
 
@@ -71,7 +74,7 @@ closeButtonEditProfile.addEventListener('click', closePopupEditProfile);
 closeButtonAddPlace.addEventListener('click', closePopupAddPlace);
 
 
-// Обработчик «отправки» формы, хотя пока она никуда отправляться не будет
+// Обработчик «отправки» формы попапа редактирования профиля
 function formSubmitHandler(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.Так мы можем определить свою логику отправки.
   // Получите значение полей из свойства value
@@ -83,15 +86,64 @@ function formSubmitHandler(evt) {
   closePopupEditProfile();
 }
 
-// Прикрепляем обработчик к форме: он будет следить за событием “submit” - «отправка»
-formElementProfile.addEventListener('submit', formSubmitHandler);
+//обработчик отправки формы попапа добавления места
+function formSubmitAddPlace (event){
+  event.preventDefault();
+  const placeElement = placeTemplate.querySelector('.place').cloneNode(true);
+  placeElement.querySelector('.place__image').src = document.querySelector('.popup__input_type_place-image').value;
+  placeElement.querySelector('.place__text').textContent = document.querySelector('.popup__input_type_place-name').value;
+  console.log(placeElement);
+  placesList.prepend(placeElement);
+  closePopupAddPlace();
 
+  
+}
 
+//// const placesListArray = Array.from(placesList);
+//// placesListArray.forEach(function(likeButton){
+////   likeButton.addEventListener('click', function (evt) {
+////     evt.target.classList.toggle('like_active');
+////   });
+////   console.log(likeButton);
+//// })
 
-
-
-//Обработчик лайков
-const placeLike = page.querySelector('.like');
-placeLike.addEventListener('click', function (evt) {
+const likeButton = document.querySelector('.like');
+likeButton.addEventListener('click', function (evt) {
   evt.target.classList.toggle('like_active');
 });
+
+
+// Прикрепляем обработчик к форме: он будет следить за событием “submit” - «отправка»
+formElementProfile.addEventListener('submit', formSubmitHandler);
+formElementPlace.addEventListener('submit', formSubmitAddPlace);
+
+//Добавление первых 6 карточек на страницу
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+]; 
+
+//Обработчик лайков
+

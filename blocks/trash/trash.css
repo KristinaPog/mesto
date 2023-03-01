@@ -1,0 +1,10 @@
+.trash{
+  background-image: url(../../images/trash.svg);
+  background-color: initial;
+  border: none;
+  position: absolute;
+  width: 18px;
+  height: 19px;
+  top: 20px;
+  right: 20px;
+}
