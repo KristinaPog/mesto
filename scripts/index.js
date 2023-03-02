@@ -22,7 +22,7 @@ let popupTitleCard = page.querySelector('.popup__title_add-card'); //Загол�
 const closeButton = page.querySelector('.popup__close'); //кнопка закрытия
 const closeButtonEditProfile = page.querySelector('.popup__close_edit-profile'); //кнопка закрытия редактирования профиля
 const closeButtonAddPlace = page.querySelector('.popup__close_add-card'); //кнопка закрытия добавления места
-const placeTemplate = document.querySelector('#place-card').content;
+
 const addCardButton = document.querySelector('.popup__submit_add-card');
 
 // Выберите элементы, куда должны быть вставлены значения полей
@@ -86,6 +86,8 @@ function formSubmitHandler(evt) {
   closePopupEditProfile();
 }
 
+const placeTemplate = page.querySelector('#place-card').content;
+
 //обработчик отправки формы попапа добавления места
 function formSubmitAddPlace (event){
   event.preventDefault();
@@ -107,10 +109,10 @@ function formSubmitAddPlace (event){
 ////   console.log(likeButton);
 //// })
 
-const likeButton = document.querySelector('.like');
-likeButton.addEventListener('click', function (evt) {
-  evt.target.classList.toggle('like_active');
-});
+// const likeButton = document.querySelector('.like');
+// likeButton.addEventListener('click', function (evt) {
+//   evt.target.classList.toggle('like_active');
+// });
 
 
 // Прикрепляем обработчик к форме: он будет следить за событием “submit” - «отправка»
@@ -120,30 +122,44 @@ formElementPlace.addEventListener('submit', formSubmitAddPlace);
 //Добавление первых 6 карточек на страницу
 const initialCards = [
   {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    name: 'Домбай',
+    link: './images/dombay.jpg'
   },
   {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    name: 'Алтай',
+    link: './images/altay.jpg'
   },
   {
     name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    link: './images/baykal.jpg'
+  },
+  {
+    name: 'Карелия',
+    link: './images/karelia.jpg'
+  },
+  {
+    name: 'Санкт-Петербург',
+    link: './images/st-petersburg.jpg'
+  },
+  {
+    name: 'Москва',
+    link: './images/moscow.jpg'
   }
 ]; 
+
+initialCards.forEach(function(card){
+  const cardHTML = `<li class="place">
+  <img src="${card.link}" alt="" class="place__image">
+  <div class="place__label">
+    <h2 class="place__text">${card.name}</h2>
+    <button type="button" class="like"></button>
+  </div>
+  <button type="button" class="trash"></button>
+</li>`
+  placesList.insertAdjacentHTML('beforeend', cardHTML);
+})
+
+
 
 //Обработчик лайков
 
