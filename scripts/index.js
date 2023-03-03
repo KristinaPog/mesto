@@ -125,7 +125,7 @@ function likeToggle () {
 function trashCard() {
   const trash = page.querySelector ('.trash');
   const placeCard = page.querySelector ('.place');
-  trash.addEventListener('click', function(evt){placeCard.remove()});
+  trash.addEventListener('click', function(){placeCard.remove()});
 }
 
 //Реализуем начальное добавление карточек
@@ -135,9 +135,11 @@ initialCards.forEach(function(card){
   cardText.textContent = card.name;
   const cardImage = placeTemplate.querySelector('.place__image');
   cardImage.src = card.link;
+  cardImage.alt = card.name;
   placesList.prepend(placeTemplate);
   likeToggle();
   trashCard();
+  imageOpened ();
 })
 
 //обработчик отправки формы попапа добавления места
@@ -146,16 +148,24 @@ function formSubmitAddPlace (event){
   const placeElement = page.querySelector('#place-card').content.cloneNode(true);
   placeElement.querySelector('.place__image').src = document.querySelector('.popup__input_type_place-image').value;
   placeElement.querySelector('.place__text').textContent = document.querySelector('.popup__input_type_place-name').value;
+  placeElement.querySelector('.place__image').alt = placeElement.querySelector('.place__text').textContent;
   placesList.prepend(placeElement);
   likeToggle();
   closePopupAddPlace();
   trashCard();
+  imageOpened ();
 }
 
+//Попап открытия картинки
+function imageOpened () {
+  const image = page.querySelector('.place__image');
+  image.addEventListener('click', function(evt) {
+    openPopupImage();
+    const popupImage = page.querySelector('.popup__image'); //куда вставляем картинку
+    popupImage.src = evt.target.src; //перекидываем ссылку
+    const popupText = page.querySelector('.popup__text'); //куда вставляем текст
+    popupText.textContent = evt.target.alt;
+    popupImage.addEventListener('click', closePopupOpenImage);
+  });
+}
 
-//попап разворачивания картинки
-const image = page.querySelector('.place__image');
-image.addEventListener('click', function() {
-  openPopupImage();
-  //закрываем попап картинки
-});

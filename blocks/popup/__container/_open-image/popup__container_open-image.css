@@ -1,4 +1,5 @@
 .popup__container_open-image{
+  width: auto;
   border-radius: none;
   background-color: initial;
 }
