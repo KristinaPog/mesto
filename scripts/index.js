@@ -5,6 +5,7 @@ const addPlaceButton = page.querySelector('.profile__button'); //находим 
 // const popup = page.querySelector('.popup'); //попап, общая конструкция
 const popupEditProfile = page.querySelector('.popup_edit-profile'); //попап редактирования имени и статуса
 const popupAddPlace = page.querySelector('.popup_add-card'); //попап добавления карточки
+const popupOpenImage = page.querySelector('.popup_open-image'); //попап открытия картинки
 let placesList = page.querySelector('.places__list');
 
 // Находим поля формы в DOM
@@ -22,7 +23,7 @@ let popupTitleCard = page.querySelector('.popup__title_add-card'); //Загол�
 const closeButton = page.querySelector('.popup__close'); //кнопка закрытия
 const closeButtonEditProfile = page.querySelector('.popup__close_edit-profile'); //кнопка закрытия редактирования профиля
 const closeButtonAddPlace = page.querySelector('.popup__close_add-card'); //кнопка закрытия добавления места
-
+const closeButtonOpenImage = page.querySelector('.popup__close_open-image'); //кнопка закрытия картинки
 const addCardButton = document.querySelector('.popup__submit_add-card');
 
 // Выберите элементы, куда должны быть вставлены значения полей
@@ -38,6 +39,9 @@ function openPopupEditProfile() {
 function openPopupAddPlace() {
   popupAddPlace.classList.add('popup_opened');
 }
+function openPopupImage (){
+  popupOpenImage.classList.add('popup_opened');
+}
 
 //Функции закрытия попапов
 function closePopupEditProfile() {
@@ -45,6 +49,9 @@ function closePopupEditProfile() {
 }
 function closePopupAddPlace() {
   popupAddPlace.classList.remove('popup_opened');
+}
+function closePopupOpenImage() {
+  popupOpenImage.classList.remove('popup_opened');
 }
 
 //Работа с попапами
@@ -59,20 +66,10 @@ addPlaceButton.addEventListener('click', function () {
   openPopupAddPlace(); //открываем попап
 });
 
-
-
-// функция добавления нового места
-// 
-
-// addCardButton.addEventListener('click', function(){
-//   
-//   close();
-// })
-
 //Прописываем закрытие по клику на крестик
 closeButtonEditProfile.addEventListener('click', closePopupEditProfile);
 closeButtonAddPlace.addEventListener('click', closePopupAddPlace);
-
+closeButtonOpenImage.addEventListener('click', closePopupOpenImage);
 
 // Обработчик «отправки» формы попапа редактирования профиля
 function formSubmitHandler(evt) {
@@ -85,35 +82,6 @@ function formSubmitHandler(evt) {
   profileStatus.textContent = jobValue;
   closePopupEditProfile();
 }
-
-const placeTemplate = page.querySelector('#place-card').content;
-
-//обработчик отправки формы попапа добавления места
-function formSubmitAddPlace (event){
-  event.preventDefault();
-  const placeElement = placeTemplate.querySelector('.place').cloneNode(true);
-  placeElement.querySelector('.place__image').src = document.querySelector('.popup__input_type_place-image').value;
-  placeElement.querySelector('.place__text').textContent = document.querySelector('.popup__input_type_place-name').value;
-  console.log(placeElement);
-  placesList.prepend(placeElement);
-  closePopupAddPlace();
-
-  
-}
-
-//// const placesListArray = Array.from(placesList);
-//// placesListArray.forEach(function(likeButton){
-////   likeButton.addEventListener('click', function (evt) {
-////     evt.target.classList.toggle('like_active');
-////   });
-////   console.log(likeButton);
-//// })
-
-// const likeButton = document.querySelector('.like');
-// likeButton.addEventListener('click', function (evt) {
-//   evt.target.classList.toggle('like_active');
-// });
-
 
 // Прикрепляем обработчик к форме: он будет следить за событием “submit” - «отправка»
 formElementProfile.addEventListener('submit', formSubmitHandler);
@@ -147,19 +115,47 @@ const initialCards = [
   }
 ]; 
 
+//обработчик лайков
+function likeToggle () {
+  const like = page.querySelector('.like');
+  like.addEventListener('click', function(evt){evt.target.classList.toggle('like_active')});
+}
+
+//функция удаления элемента
+function trashCard() {
+  const trash = page.querySelector ('.trash');
+  const placeCard = page.querySelector ('.place');
+  trash.addEventListener('click', function(evt){placeCard.remove()});
+}
+
+//Реализуем начальное добавление карточек
 initialCards.forEach(function(card){
-  const cardHTML = `<li class="place">
-  <img src="${card.link}" alt="" class="place__image">
-  <div class="place__label">
-    <h2 class="place__text">${card.name}</h2>
-    <button type="button" class="like"></button>
-  </div>
-  <button type="button" class="trash"></button>
-</li>`
-  placesList.insertAdjacentHTML('beforeend', cardHTML);
+  const placeTemplate = page.querySelector('#place-card').content.cloneNode(true); //клонируем темплейт
+  const cardText = placeTemplate.querySelector('.place__text');
+  cardText.textContent = card.name;
+  const cardImage = placeTemplate.querySelector('.place__image');
+  cardImage.src = card.link;
+  placesList.prepend(placeTemplate);
+  likeToggle();
+  trashCard();
 })
 
+//обработчик отправки формы попапа добавления места
+function formSubmitAddPlace (event){
+  event.preventDefault();
+  const placeElement = page.querySelector('#place-card').content.cloneNode(true);
+  placeElement.querySelector('.place__image').src = document.querySelector('.popup__input_type_place-image').value;
+  placeElement.querySelector('.place__text').textContent = document.querySelector('.popup__input_type_place-name').value;
+  placesList.prepend(placeElement);
+  likeToggle();
+  closePopupAddPlace();
+  trashCard();
+}
 
 
-//Обработчик лайков
-
+//попап разворачивания картинки
+const image = page.querySelector('.place__image');
+image.addEventListener('click', function() {
+  openPopupImage();
+  //закрываем попап картинки
+});
