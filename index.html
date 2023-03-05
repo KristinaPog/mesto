@@ -6,6 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="pages/index.css">
+  <script defer src="scripts/constants.js"></script>
+  <script defer src="scripts/index.js"></script>
   <title>Место</title>
 </head>
 
@@ -40,11 +42,11 @@
       <button class="popup__close popup__close_edit-profile" type="button" aria-label="Закрыть"></button>
       <form action="#" name="popupForm" class="popup__form popup__form_edit-profile">
         <h3 class="popup__title popup__title_edit-profile">Редактировать профиль</h3>
-        <input type="text" name="profileName" value=" " placeholder="Введите имя"
+        <input type="text" name="profileName" placeholder="Введите имя"
           class="popup__input popup__input_type_name" required>
-        <input type="text" name="profileStatus" value=" " placeholder="Введите статус"
+        <input type="text" name="profileStatus" placeholder="Введите статус"
           class="popup__input popup__input_type_status">
-        <button type="submit" class="popup__submit popup__submit_edit-profile">Сохранить</button>
+        <button type="submit" class="popup__submit popup__submit_edit-profile" aria-label="Сохранить изменения">Сохранить</button>
       </form>
     </div>
   </div>
@@ -55,9 +57,9 @@
         <h3 class="popup__title popup__title_add-card">Новое место</h3>
         <input type="text" name="profileName" value="" placeholder="Название"
           class="popup__input popup__input_type_place-name" required>
-        <input type="text" name="profileStatus" value="" placeholder="Ссылка на картинку"
-          class="popup__input popup__input_type_place-image">
-        <button type="submit" class="popup__submit popup__submit_add-card">Создать</button>
+        <input type="url" name="profileStatus" value="" placeholder="Ссылка на картинку"
+          class="popup__input popup__input_type_place-image" required>
+        <button type="submit" class="popup__submit popup__submit_add-card" aria-label="Создать карточку">Создать</button>
       </form>
     </div>
   </div>
@@ -73,12 +75,12 @@
       <img class="place__image">
       <div class="place__label">
         <h2 class="place__text"></h2>
-        <button type="button" class="like"></button>
+        <button type="button" class="like" aria-label="Поставить лайк"></button>
       </div>
       <button type="button" class="trash"></button>
     </li>
   </template>
-  <script src="scripts/index.js"></script>
+  
 </body>
 
 </html>

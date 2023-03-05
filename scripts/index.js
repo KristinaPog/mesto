@@ -2,24 +2,22 @@ const page = document.querySelector('.page');
 // Кнопки
 const editProfileButton = page.querySelector('.profile-info__button'); // кнопка редактирования данных пользователя
 const addPlaceButton = page.querySelector('.profile__button'); //находим кнопку добавления нового места
-// const popup = page.querySelector('.popup'); //попап, общая конструкция
+const popup = page.querySelector('.popup'); //попап, общая конструкция
 const popupEditProfile = page.querySelector('.popup_edit-profile'); //попап редактирования имени и статуса
 const popupAddPlace = page.querySelector('.popup_add-card'); //попап добавления карточки
 const popupOpenImage = page.querySelector('.popup_open-image'); //попап открытия картинки
-let placesList = page.querySelector('.places__list');
+const placesList = page.querySelector('.places__list');
 
 // Находим поля формы в DOM
-let nameInput = page.querySelector('.popup__input_type_name'); //поле формы редактирования имени
-let jobInput = page.querySelector('.popup__input_type_status'); //поле формы редактирования статуса
-let placeImageInput = page.querySelector('.popup__input_type_place-name'); //поле добавления ссылки на картинку
-let placeLabelInput = page.querySelector('.popup__input_type_place-image'); //поле редактирования ссылки на подпись
+const nameInput = page.querySelector('.popup__input_type_name'); //поле формы редактирования имени
+const jobInput = page.querySelector('.popup__input_type_status'); //поле формы редактирования статуса
+const placeImageInput = page.querySelector('.popup__input_type_place-name'); //поле добавления ссылки на картинку
+const placeLabelInput = page.querySelector('.popup__input_type_place-image'); //поле редактирования ссылки на подпись
 
-const formElement = page.querySelector('.popup__form'); //форма, общая конструкция
 const formElementProfile = page.querySelector('.popup__form_edit-profile');//форма добавления имени и статуса
 const formElementPlace = page.querySelector('.popup__form_add-card');//форма добавления места
-let popupTitle = page.querySelector('.popup__title'); // заголовок общий
-let popupTitleProfile = page.querySelector('.popup__title_edit-profile'); //Заголовок формы редактирования профиля
-let popupTitleCard = page.querySelector('.popup__title_add-card'); //Заголовок формы добавления мест
+const popupTitleProfile = page.querySelector('.popup__title_edit-profile'); //Заголовок формы редактирования профиля
+const popupTitleCard = page.querySelector('.popup__title_add-card'); //Заголовок формы добавления мест
 const closeButton = page.querySelector('.popup__close'); //кнопка закрытия
 const closeButtonEditProfile = page.querySelector('.popup__close_edit-profile'); //кнопка закрытия редактирования профиля
 const closeButtonAddPlace = page.querySelector('.popup__close_add-card'); //кнопка закрытия добавления места
@@ -27,52 +25,40 @@ const closeButtonOpenImage = page.querySelector('.popup__close_open-image'); //�
 const addCardButton = document.querySelector('.popup__submit_add-card');
 
 // Выберите элементы, куда должны быть вставлены значения полей
-let profileName = page.querySelector('.profile-info__name'); //имя пользователя видимое на странице
-let profileStatus = page.querySelector('.profile-info__status'); //статус пользователя видимый на странице
-let placeImage = page.querySelector('.place__image'); //картинка
-let placeLabel = page.querySelector('.place__text'); // подпись
+const profileName = page.querySelector('.profile-info__name'); //имя пользователя видимое на странице
+const profileStatus = page.querySelector('.profile-info__status'); //статус пользователя видимый на странице
+const placeImage = page.querySelector('.place__image'); //картинка
+const placeLabel = page.querySelector('.place__text'); // подпись
 
 //Функции открытия попапов
-function openPopupEditProfile() {
-  popupEditProfile.classList.add('popup_opened');
-}
-function openPopupAddPlace() {
-  popupAddPlace.classList.add('popup_opened');
-}
-function openPopupImage (){
-  popupOpenImage.classList.add('popup_opened');
+function openPopup(popup){
+  popup.classList.add('popup_opened');
 }
 
 //Функции закрытия попапов
-function closePopupEditProfile() {
-  popupEditProfile.classList.remove('popup_opened');
-}
-function closePopupAddPlace() {
-  popupAddPlace.classList.remove('popup_opened');
-}
-function closePopupOpenImage() {
-  popupOpenImage.classList.remove('popup_opened');
+function closePopup(popup){
+  popup.classList.remove('popup_opened');
 }
 
 //Работа с попапами
 // 1. Попап добавления Имени и статуса
 editProfileButton.addEventListener('click', function () {
-  openPopupEditProfile(); //открываем попап
+  openPopup(popupEditProfile); //открываем попап
   nameInput.value = profileName.textContent; //вставляем в форму значение имени со страницы
   jobInput.value = profileStatus.textContent; //вставляем в форму значение статуса со страницы
 });
 // 2. Попап добавления нового места
 addPlaceButton.addEventListener('click', function () {
-  openPopupAddPlace(); //открываем попап
+  openPopup(popupAddPlace); //открываем попап
 });
 
 //Прописываем закрытие по клику на крестик
-closeButtonEditProfile.addEventListener('click', closePopupEditProfile);
-closeButtonAddPlace.addEventListener('click', closePopupAddPlace);
-closeButtonOpenImage.addEventListener('click', closePopupOpenImage);
+closeButtonEditProfile.addEventListener('click', function(){closePopup(popupEditProfile);});
+closeButtonAddPlace.addEventListener('click', function(){closePopup(popupAddPlace)});
+closeButtonOpenImage.addEventListener('click', function(){closePopup(popupOpenImage)});
 
 // Обработчик «отправки» формы попапа редактирования профиля
-function formSubmitHandler(evt) {
+function formSubmitEditProfile(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.Так мы можем определить свою логику отправки.
   // Получите значение полей из свойства value
   let nameValue = nameInput.value;
@@ -80,66 +66,39 @@ function formSubmitHandler(evt) {
   // Вставьте новые значения с помощью textContent
   profileName.textContent = nameValue;
   profileStatus.textContent = jobValue;
-  closePopupEditProfile();
+  closePopup(popupEditProfile);
 }
 
 // Прикрепляем обработчик к форме: он будет следить за событием “submit” - «отправка»
-formElementProfile.addEventListener('submit', formSubmitHandler);
+formElementProfile.addEventListener('submit', formSubmitEditProfile);
 formElementPlace.addEventListener('submit', formSubmitAddPlace);
 
-//Добавление первых 6 карточек на страницу
-const initialCards = [
-  {
-    name: 'Домбай',
-    link: './images/dombay.jpg'
-  },
-  {
-    name: 'Алтай',
-    link: './images/altay.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: './images/baykal.jpg'
-  },
-  {
-    name: 'Карелия',
-    link: './images/karelia.jpg'
-  },
-  {
-    name: 'Санкт-Петербург',
-    link: './images/st-petersburg.jpg'
-  },
-  {
-    name: 'Москва',
-    link: './images/moscow.jpg'
-  }
-]; 
-
 //обработчик лайков
-function likeToggle () {
-  const like = page.querySelector('.like');
+function initLikeToggle (cardElement) {
+  const like = cardElement.querySelector('.like');
   like.addEventListener('click', function(evt){evt.target.classList.toggle('like_active')});
 }
 
 //функция удаления элемента
-function trashCard() {
-  const trash = page.querySelector ('.trash');
-  const placeCard = page.querySelector ('.place');
+function initDeleteCard(cardElement) {
+  const trash = cardElement.querySelector ('.trash');
+  const placeCard = cardElement.querySelector ('.place');
   trash.addEventListener('click', function(){placeCard.remove()});
 }
 
 //Реализуем начальное добавление карточек
 initialCards.forEach(function(card){
-  const placeTemplate = page.querySelector('#place-card').content.cloneNode(true); //клонируем темплейт
-  const cardText = placeTemplate.querySelector('.place__text');
+  const newPlace = page.querySelector('#place-card').content.cloneNode(true); //клонируем темплейт
+  const cardText = newPlace.querySelector('.place__text');
   cardText.textContent = card.name;
-  const cardImage = placeTemplate.querySelector('.place__image');
+  const cardImage = newPlace.querySelector('.place__image');
   cardImage.src = card.link;
   cardImage.alt = card.name;
-  placesList.prepend(placeTemplate);
-  likeToggle();
-  trashCard();
-  imageOpened ();
+  initLikeToggle(newPlace);
+  initDeleteCard(newPlace);
+  initImageOpened(newPlace);
+  placesList.prepend(newPlace);
+  
 })
 
 //обработчик отправки формы попапа добавления места
@@ -149,23 +108,23 @@ function formSubmitAddPlace (event){
   placeElement.querySelector('.place__image').src = document.querySelector('.popup__input_type_place-image').value;
   placeElement.querySelector('.place__text').textContent = document.querySelector('.popup__input_type_place-name').value;
   placeElement.querySelector('.place__image').alt = placeElement.querySelector('.place__text').textContent;
+  initLikeToggle(placeElement);
+  initDeleteCard(placeElement);
+  initImageOpened(placeElement);
   placesList.prepend(placeElement);
-  likeToggle();
-  closePopupAddPlace();
-  trashCard();
-  imageOpened ();
+  closePopup(popupAddPlace);
 }
 
 //Попап открытия картинки
-function imageOpened () {
-  const image = page.querySelector('.place__image');
+function initImageOpened (cardElement) {
+  const image = cardElement.querySelector('.place__image');
   image.addEventListener('click', function(evt) {
-    openPopupImage();
+    openPopup(popupOpenImage);
     const popupImage = page.querySelector('.popup__image'); //куда вставляем картинку
     popupImage.src = evt.target.src; //перекидываем ссылку
+    popupImage.alt = evt.target.alt; //прописываем altы
     const popupText = page.querySelector('.popup__text'); //куда вставляем текст
     popupText.textContent = evt.target.alt;
-    popupImage.addEventListener('click', closePopupOpenImage);
   });
 }
 
