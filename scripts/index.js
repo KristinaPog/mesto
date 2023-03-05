@@ -86,32 +86,31 @@ function initDeleteCard(cardElement) {
   trash.addEventListener('click', function(){placeCard.remove()});
 }
 
-//Реализуем начальное добавление карточек
-initialCards.forEach(function(card){
-  const newPlace = page.querySelector('#place-card').content.cloneNode(true); //клонируем темплейт
-  const cardText = newPlace.querySelector('.place__text');
-  cardText.textContent = card.name;
-  const cardImage = newPlace.querySelector('.place__image');
-  cardImage.src = card.link;
-  cardImage.alt = card.name;
-  initLikeToggle(newPlace);
+const createCard = ({name, link}) => {
+  const newPlace = page.querySelector('#place-card').content.cloneNode(true);
+  const cardText = newPlace.querySelector('.place__text'); 
+  cardText.textContent = name; 
+  const cardImage = newPlace.querySelector('.place__image'); 
+  cardImage.src = link; 
+  cardImage.alt = name; 
   initDeleteCard(newPlace);
+  initLikeToggle(newPlace); 
   initImageOpened(newPlace);
-  placesList.prepend(newPlace);
-  
-})
+  return newPlace;
+}
+
+const renderCard = cardData => {
+    const newCard = createCard(cardData);
+    placesList.prepend(newCard);
+}
+
+initialCards.forEach(function(card){renderCard(card);});
+
 
 //обработчик отправки формы попапа добавления места
 function formSubmitAddPlace (event){
   event.preventDefault();
-  const placeElement = page.querySelector('#place-card').content.cloneNode(true);
-  placeElement.querySelector('.place__image').src = document.querySelector('.popup__input_type_place-image').value;
-  placeElement.querySelector('.place__text').textContent = document.querySelector('.popup__input_type_place-name').value;
-  placeElement.querySelector('.place__image').alt = placeElement.querySelector('.place__text').textContent;
-  initLikeToggle(placeElement);
-  initDeleteCard(placeElement);
-  initImageOpened(placeElement);
-  placesList.prepend(placeElement);
+  renderCard({name: document.querySelector('.popup__input_type_place-name').value, link: document.querySelector('.popup__input_type_place-image').value});
   closePopup(popupAddPlace);
 }
 
