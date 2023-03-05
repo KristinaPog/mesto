@@ -86,7 +86,7 @@ function initDeleteCard(cardElement) {
   trash.addEventListener('click', function(){placeCard.remove()});
 }
 
-const createCard = ({name, link}) => {
+const createCard = function({name, link}) {
   const newPlace = page.querySelector('#place-card').content.cloneNode(true);
   const cardText = newPlace.querySelector('.place__text'); 
   cardText.textContent = name; 
@@ -99,7 +99,7 @@ const createCard = ({name, link}) => {
   return newPlace;
 }
 
-const renderCard = cardData => {
+const renderCard = function (cardData) {
     const newCard = createCard(cardData);
     placesList.prepend(newCard);
 }
