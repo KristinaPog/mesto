@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="pages/index.css">
   <script defer src="scripts/constants.js"></script>
   <script defer src="scripts/index.js"></script>
+  <script defer src="scripts/validate.js"></script>
   <title>Место</title>
 </head>
 
@@ -40,29 +41,35 @@
   <div class="popup popup_edit-profile">
     <div class="popup__container popup__container_edit-profile">
       <button class="popup__close popup__close_edit-profile" type="button" aria-label="Закрыть"></button>
-      <form action="#" name="popupForm" class="popup__form popup__form_edit-profile">
+      <form action="#" name="popupForm" class="popup__form popup__form_edit-profile" novalidate>
         <h3 class="popup__title popup__title_edit-profile">Редактировать профиль</h3>
-        <input type="text" name="profileName" placeholder="Введите имя"
-          class="popup__input popup__input_type_name" required>
-        <input type="text" name="profileStatus" placeholder="Введите статус"
-          class="popup__input popup__input_type_status">
+        <input type="text" name="profileName" id="name-input" placeholder="Введите имя"
+          class="popup__input popup__input_type_name" required minlength="2" maxlength="40">
+        <span class="popup__input-error name-input-error"></span>
+        <input type="text" name="profileStatus" id="name-status" placeholder="Введите статус"
+          class="popup__input popup__input_type_status" required minlength="2" maxlength="200">
+        <span class="popup__input-error name-status-error"></span>
         <button type="submit" class="popup__submit popup__submit_edit-profile" aria-label="Сохранить изменения">Сохранить</button>
       </form>
     </div>
   </div>
+
   <div class="popup popup_add-card">
     <div class="popup__container">
       <button class="popup__close popup__close_add-card" type="button" aria-label="Закрыть"></button>
-      <form action="#" name="popupForm" class="popup__form popup__form_add-card">
+      <form action="#" name="popupForm" class="popup__form popup__form_add-card" novalidate>
         <h3 class="popup__title popup__title_add-card">Новое место</h3>
-        <input type="text" name="profileName" value="" placeholder="Название"
-          class="popup__input popup__input_type_place-name" required>
-        <input type="url" name="profileStatus" value="" placeholder="Ссылка на картинку"
-          class="popup__input popup__input_type_place-image" required>
+        <input type="text" name="placeName" value="" placeholder="Название"
+          class="popup__input popup__input_type_place-name" id="place-name" required minlength="2" maxlength="200">
+        <span class="popup__input-error place-name-error"></span>
+        <input type="url" name="placeLink" value="" placeholder="Ссылка на картинку"
+          class="popup__input popup__input_type_place-image" id="place-image" required minlength="2" maxlength="200">
+        <span class="popup__input-error place-image-error"></span>
         <button type="submit" class="popup__submit popup__submit_add-card" aria-label="Создать карточку">Создать</button>
       </form>
     </div>
   </div>
+
   <div class="popup popup_open-image">
     <div class="popup__container popup__container_open-image">
       <img src="#" alt="" class="popup__image">
