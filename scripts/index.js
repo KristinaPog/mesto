@@ -50,10 +50,12 @@ function closePopupEsc(popupElement) {
 function close(){
   const popups = page.querySelectorAll('.popup');
   popups.forEach((popup)=>{
+    popup.addEventListener('click', function(evt){if (evt.currentTarget === evt.target) {
+      closePopup(popup);}})
     closePopupEsc(popup);
-    popup.addEventListener('click', function(){closePopup(popup)});
   })
 }
+
 close();
 
 //Работа с попапами
@@ -73,10 +75,6 @@ addPlaceButton.addEventListener('click', function () {
 closeButtonEditProfile.addEventListener('click', function(){closePopup(popupEditProfile)});
 closeButtonAddPlace.addEventListener('click', function(){closePopup(popupAddPlace)});
 closeButtonOpenImage.addEventListener('click', function(){closePopup(popupOpenImage)});
-
-
-
-
 
 // Обработчик «отправки» формы попапа редактирования профиля
 function formSubmitEditProfile(evt) {

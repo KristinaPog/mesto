@@ -40,8 +40,9 @@
   </footer>
   <div class="popup popup_edit-profile">
     <div class="popup__container popup__container_edit-profile">
-      <button class="popup__close popup__close_edit-profile" type="button" aria-label="Закрыть"></button>
       <form action="#" name="popupForm" class="popup__form popup__form_edit-profile" novalidate>
+        <button class="popup__close popup__close_edit-profile" name="popupButtonExit" type="button"
+          aria-label="Закрыть"></button>
         <h3 class="popup__title popup__title_edit-profile">Редактировать профиль</h3>
         <input type="text" name="profileName" id="name-input" placeholder="Введите имя"
           class="popup__input popup__input_type_name" required minlength="2" maxlength="40">
@@ -49,7 +50,8 @@
         <input type="text" name="profileStatus" id="name-status" placeholder="Введите статус"
           class="popup__input popup__input_type_status" required minlength="2" maxlength="200">
         <span class="popup__input-error name-status-error"></span>
-        <button type="submit" class="popup__submit popup__submit_edit-profile" aria-label="Сохранить изменения">Сохранить</button>
+        <button type="submit" name="popupButton" class="popup__submit popup__submit_edit-profile"
+          aria-label="Сохранить изменения">Сохранить</button>
       </form>
     </div>
   </div>
@@ -65,7 +67,8 @@
         <input type="url" name="placeLink" value="" placeholder="Ссылка на картинку"
           class="popup__input popup__input_type_place-image" id="place-image" required minlength="2" maxlength="200">
         <span class="popup__input-error place-image-error"></span>
-        <button type="submit" class="popup__submit popup__submit_add-card" aria-label="Создать карточку">Создать</button>
+        <button type="submit" name="popupButton" class="popup__submit popup__submit_add-card"
+          aria-label="Создать карточку">Создать</button>
       </form>
     </div>
   </div>
@@ -87,7 +90,7 @@
       <button type="button" class="trash"></button>
     </li>
   </template>
-  
+
 </body>
 
 </html>

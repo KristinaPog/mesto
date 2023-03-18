@@ -1,4 +1,4 @@
-const popupForm = page.querySelector('.popup__form');
+// const popupForm = page.querySelector('.popup__form');
 
 // функция добавляет класс со стилями инпутов при ошибке
 const showInputError = (formElement, inputElement, errorMessage) => {
@@ -63,8 +63,8 @@ const setEventsListeners = (formElement) => {
     
   })};
 
-const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll('.popup__form'));
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
   formList.forEach((formElement)=>{
     formElement.addEventListener('submit',(evt)=>{
       evt.preventDefault();
@@ -73,9 +73,9 @@ const enableValidation = () => {
   });
 };
 
-enableValidation();
-
-
+enableValidation({
+  formSelector: '.popup__form',
+});
 
 
 
@@ -99,14 +99,7 @@ enableValidation();
 // включение валидации вызовом enableValidation
 // все настройки передаются при вызове
 
-// enableValidation({
-//   formSelector: '.popup__form',
-//   inputSelector: '.popup__input',
-//   submitButtonSelector: '.popup__button',
-//   inactiveButtonClass: 'popup__button_disabled',
-//   inputErrorClass: 'popup__input_type_error',
-//   errorClass: 'popup__error_visible'
-// });
+// 
 
 
 // 
