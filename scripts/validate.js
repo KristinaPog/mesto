@@ -1,5 +1,3 @@
-// const popupForm = page.querySelector('.popup__form');
-
 // функция добавляет класс со стилями инпутов при ошибке
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
@@ -76,30 +74,3 @@ const enableValidation = (config) => {
 enableValidation({
   formSelector: '.popup__form',
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Разбейте код валидации на функции. 
-// Вы уже делали это в теме «Валидация форм». 
-// Сделайте функцию enableValidation ответственной за включение валидации всех форм. 
-// Пусть она принимает как объект настроек все нужные функциям классы и селекторы элементов:
-
-// включение валидации вызовом enableValidation
-// все настройки передаются при вызове
-
-// 
-
-
-// 
