@@ -55,8 +55,7 @@ const setEventsListeners = (formElement, inputSelector, submitButtonSelector, in
   const buttonElement = formElement.querySelector(submitButtonSelector);
   toggleButtonState(popupInputList, buttonElement, inactiveButtonClass);
   formElement.addEventListener('reset', () => {
-    buttonElement.setAttribute('disabled', true);
-    buttonElement.classList.add(inactiveButtonClass);
+    disabledButton(buttonElement, inactiveButtonClass);
   });
   popupInputList.forEach((inputElement) =>{
     inputElement.addEventListener('input', function (evt){
