@@ -37,6 +37,10 @@ const activateButton = (buttonElement, inactiveButtonClass) => {
   buttonElement.removeAttribute('disabled');
 }
 
+const cleanErrorInput = (inputElement) => {
+  
+}
+
 const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
   if (hasInvalidInput(inputList)){
     disabledButton(buttonElement, inactiveButtonClass);
