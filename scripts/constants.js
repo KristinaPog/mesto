@@ -1,5 +1,5 @@
 //Добавление первых 6 карточек на страницу
-const initialCards = [
+export const initialCards = [
   {
     name: 'Домбай',
     link: './images/dombay.jpg'

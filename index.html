@@ -6,9 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="pages/index.css">
-  <script defer src="scripts/constants.js"></script>
-  <script defer src="scripts/index.js"></script>
-  <script defer src="scripts/validate.js"></script>
+  
   <title>Место</title>
 </head>
 
@@ -80,7 +78,8 @@
       <button class="popup__close popup__close_open-image" type="button" aria-label="Закрыть"></button>
     </div>
   </div>
-  <template id="place-card">
+
+  <template id="place-card" class="place-card">
     <li class="place">
       <img class="place__image">
       <div class="place__label">
@@ -90,7 +89,10 @@
       <button type="button" class="trash"></button>
     </li>
   </template>
-
+  <script type="module" src="scripts/card.js"></script>
+  <script type="module" src="scripts/constants.js"></script>
+  <script type="module" src="scripts/index.js"></script>
+  <script type="module" src="scripts/validate.js"></script>
 </body>
 
 </html>

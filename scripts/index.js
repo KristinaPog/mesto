@@ -1,3 +1,6 @@
+import {initialCards} from './constants.js';
+import {Card} from './card.js';
+
 const page = document.querySelector('.page');
 // Кнопки
 const editProfileButton = page.querySelector('.profile-info__button'); // кнопка редактирования данных пользователя
@@ -11,21 +14,21 @@ const placesList = page.querySelector('.places__list');
 // Находим поля формы в DOM
 const nameInput = page.querySelector('.popup__input_type_name'); //поле формы редактирования имени
 const jobInput = page.querySelector('.popup__input_type_status'); //поле формы редактирования статуса
-const placeImageInput = page.querySelector('.popup__input_type_place-name'); //поле добавления ссылки на картинку
-const placeLabelInput = page.querySelector('.popup__input_type_place-image'); //поле редактирования ссылки на подпись
+// const placeImageInput = page.querySelector('.popup__input_type_place-name'); //поле добавления ссылки на картинку
+// const placeLabelInput = page.querySelector('.popup__input_type_place-image'); //поле редактирования ссылки на подпись
 
 const formElementProfile = document.forms['editProfileForm'];//форма добавления имени и статуса
 const formElementPlace = document.forms['addCardForm']//форма добавления места
-const popupTitleProfile = page.querySelector('.popup__title_edit-profile'); //Заголовок формы редактирования профиля
-const popupTitleCard = page.querySelector('.popup__title_add-card'); //Заголовок формы добавления мест
-const addCardButton = document.querySelector('.popup__submit_add-card');
+// const popupTitleProfile = page.querySelector('.popup__title_edit-profile'); //Заголовок формы редактирования профиля
+// const popupTitleCard = page.querySelector('.popup__title_add-card'); //Заголовок формы добавления мест
+// const addCardButton = document.querySelector('.popup__submit_add-card');
 
 // Выберите элементы, куда должны быть вставлены значения полей
 const profileName = page.querySelector('.profile-info__name'); //имя пользователя видимое на странице
 const profileStatus = page.querySelector('.profile-info__status'); //статус пользователя видимый на странице
-const placeImage = page.querySelector('.place__image'); //картинка
+// const placeImage = page.querySelector('.place__image'); //картинка
 const popupImage = page.querySelector('.popup__image'); //куда вставляем картинку
-const placeLabel = page.querySelector('.place__text'); // подпись
+// const placeLabel = page.querySelector('.place__text'); // подпись
 const popupText = page.querySelector('.popup__text'); //куда вставляем текст
 const inputPlaceName = document.querySelector('.popup__input_type_place-name'); //инпут названия места
 const inputPlaceImage = document.querySelector('.popup__input_type_place-image'); //инпут ссылки 
@@ -89,40 +92,11 @@ function handleProfileFormSubmit(evt) {
 formElementProfile.addEventListener('submit', handleProfileFormSubmit);
 formElementPlace.addEventListener('submit', handleAddPlaceFormSubmit);
 
-//обработчик лайков
-function initLikeToggle (cardElement) {
-  const like = cardElement.querySelector('.like');
-  like.addEventListener('click', function(evt){evt.target.classList.toggle('like_active')});
-}
-
-//функция удаления элемента
-function initDeleteCard(cardElement) {
-  const trash = cardElement.querySelector ('.trash');
-  const placeCard = cardElement.querySelector ('.place');
-  trash.addEventListener('click', function(){placeCard.remove()});
-}
-//создаем функцию создания карточки, аргументами в неё должны приходить имя и ссылка на изображение
-const createCard = function({name, link}) {
-  const newPlace = page.querySelector('#place-card').content.cloneNode(true);
-  const cardText = newPlace.querySelector('.place__text'); 
-  cardText.textContent = name; 
-  const cardImage = newPlace.querySelector('.place__image'); 
-  cardImage.src = link; 
-  cardImage.alt = name; 
-  initDeleteCard(newPlace);
-  initLikeToggle(newPlace);
-  initImageOpened(newPlace);
-  return newPlace;
-}
-
-//создаем функцию, которая будет включать функцию создания карточки
-const renderCard = function (cardData) {
-    const newCard = createCard(cardData);
-    placesList.prepend(newCard);
-}
-
-// перебираем массив из которого берем значения name и link и создаём карточки
-initialCards.forEach(renderCard);
+initialCards.forEach((item)=>{
+  const card = new Card(item.name, item.link, '#place-card');
+  const cardElement = card.generateCard();
+  placesList.prepend(cardElement);
+});
 
 //обработчик отправки формы попапа добавления места
 function handleAddPlaceFormSubmit (event){
