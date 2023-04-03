@@ -69,19 +69,17 @@ addPlaceValidation.enableValidation();
 //Работа с попапами
 //Попап добавления Имени и статуса
 editProfileButton.addEventListener('click', function () {
-  openPopup(popupEditProfile); //открываем попап
-  nameInput.value = profileName.textContent; //вставляем в форму значение имени со страницы
-  jobInput.value = profileStatus.textContent; //вставляем в форму значение статуса со страницы
+  openPopup(popupEditProfile); 
+  nameInput.value = profileName.textContent; 
+  jobInput.value = profileStatus.textContent; 
 });
 
 // Обработчик «отправки» формы попапа редактирования профиля
 function handleProfileFormSubmit(evt) {
-  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.Так мы можем определить свою логику отправки.
-  // Получите значение полей из свойства value
+  evt.preventDefault();
   editProfileValidation.enableValidation();
   const nameValue = nameInput.value;
   const jobValue = jobInput.value;
-  // Вставьте новые значения с помощью textContent
   profileName.textContent = nameValue;
   profileStatus.textContent = jobValue;
   closePopup(popupEditProfile);
@@ -103,7 +101,6 @@ addPlaceButton.addEventListener('click', function () {
 //обработчик отправки формы попапа добавления места
 function handleAddPlaceFormSubmit (event){
   event.preventDefault();
-  
   const card =  new Card (inputPlaceName.value, inputPlaceImage.value, '.place-card');
   const cardElement = card.generateCard();
   initImageOpened (cardElement);
@@ -121,8 +118,8 @@ function initImageOpened (cardElement) {
   const image = cardElement.querySelector('.place__image');
   image.addEventListener('click', function(evt) {
     openPopup(popupOpenImage);
-    popupImage.src = evt.target.src; //перекидываем ссылку
-    popupImage.alt = evt.target.alt; //прописываем altы
+    popupImage.src = evt.target.src; 
+    popupImage.alt = evt.target.alt; 
     popupText.textContent = evt.target.alt;
   });
 }
