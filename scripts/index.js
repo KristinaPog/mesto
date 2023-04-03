@@ -3,7 +3,6 @@ import {Card} from './card.js';
 import {FormValidator} from './validate.js';
 
 const page = document.querySelector('.page');
-// Кнопки
 const editProfileButton = page.querySelector('.profile-info__button'); // кнопка редактирования данных пользователя
 const addPlaceButton = page.querySelector('.profile__button'); //находим кнопку добавления нового места
 const popupEditProfile = page.querySelector('.popup_edit-profile'); //попап редактирования имени и статуса
@@ -12,22 +11,13 @@ const formAddCard = page.querySelector('.popup__form_add-card');
 const popupAddPlace = page.querySelector('.popup_add-card'); //попап добавления карточки
 const popupOpenImage = page.querySelector('.popup_open-image'); //попап открытия картинки
 const placesList = page.querySelector('.places__list');
-
-// Находим поля формы в DOM
 const nameInput = page.querySelector('.popup__input_type_name'); //поле формы редактирования имени
 const jobInput = page.querySelector('.popup__input_type_status'); //поле формы редактирования статуса
-const placeImageInput = page.querySelector('.popup__input_type_place-name'); //поле добавления ссылки на картинку
-const placeLabelInput = page.querySelector('.popup__input_type_place-image'); //поле редактирования ссылки на подпись
 const formElementProfile = document.forms['editProfileForm'];//форма добавления имени и статуса
 const formElementPlace = document.forms['addCardForm']//форма добавления места
-const popupTitleProfile = page.querySelector('.popup__title_edit-profile'); //Заголовок формы редактирования профиля
-const popupTitleCard = page.querySelector('.popup__title_add-card'); //Заголовок формы добавления мест
-const addCardButton = document.querySelector('.popup__submit_add-card');
 const profileName = page.querySelector('.profile-info__name'); //имя пользователя видимое на странице
 const profileStatus = page.querySelector('.profile-info__status'); //статус пользователя видимый на странице
-const placeImage = page.querySelector('.place__image'); //картинка
 const popupImage = page.querySelector('.popup__image'); //куда вставляем картинку
-const placeLabel = page.querySelector('.place__text'); // подпись
 const popupText = page.querySelector('.popup__text'); //куда вставляем текст
 const inputPlaceName = document.querySelector('.popup__input_type_place-name'); //инпут названия места
 const inputPlaceImage = document.querySelector('.popup__input_type_place-image'); //инпут ссылки 
@@ -125,8 +115,6 @@ function handleAddPlaceFormSubmit (event){
 // Прикрепляем обработчик к форме: он будет следить за событием “submit” - «отправка»
 formElementProfile.addEventListener('submit', handleProfileFormSubmit);
 formElementPlace.addEventListener('submit', handleAddPlaceFormSubmit);
-
-
 
 //Попап открытия картинки
 function initImageOpened (cardElement) {
