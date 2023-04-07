@@ -8,7 +8,7 @@ export class Card {
 
   _getTemplate(){ 
     const newPlace = document.querySelector(this._templateSelector).content.querySelector('.place').cloneNode(true); 
-    return newPlace; 
+    return newPlace;
   } 
 
   _initLikeToggle () { 
