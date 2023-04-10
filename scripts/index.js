@@ -31,17 +31,15 @@ const validationConfig = {
   errorClass: 'popup__input-error_active'
 };
 
-const editProfileValidation = new FormValidator(validationConfig, formEditProfile);
-const addPlaceValidation = new FormValidator(validationConfig, formAddCard);
-editProfileValidation.enableValidation();
-addPlaceValidation.enableValidation();
+const profileFormValidator = new FormValidator(validationConfig, formEditProfile);
+const placeFormValidator = new FormValidator(validationConfig, formAddCard);
+profileFormValidator.enableValidation();
+placeFormValidator.enableValidation();
 
 //Функции открытия попапов
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupByEsc);
-  editProfileValidation.resetValidation();
-  addPlaceValidation.resetValidation();
 }
 
 //Функции закрытия попапов
@@ -57,10 +55,11 @@ function closePopupByEsc(evt) {
   }
 }
 
-function preparationPopup() {
+function openProfileEditPopup() {
   openPopup(popupEditProfile);
   nameInput.value = profileName.textContent;
   jobInput.value = profileStatus.textContent;
+  profileFormValidator.resetValidation();
 }
 
 // Обработчик «отправки» формы попапа редактирования профиля
@@ -74,22 +73,22 @@ function handleProfileFormSubmit(evt) {
 }
 
 //Попап открытия картинки
-const handleImageClick = (name, link) => {
+const openImagePopup = (name, link) => {
   popupImage.src = link;
   popupImage.alt = name;
   popupText.textContent = name;
   openPopup(popupOpenImage);
 }
 
-function createCard(item, templateSelector) {
-  const card = new Card(item, templateSelector, handleImageClick);
+function createCard(cardData, templateSelector) {
+  const card = new Card(cardData, templateSelector, openImagePopup);
   const cardElement = card.generateCard();
   return cardElement;
 }
 
 //обработчик отправки формы попапа добавления места
 function handleAddPlaceFormSubmit(event) {
-  event.preventDefault();
+  event.preventDefault();  
   const cardElement = createCard({ name: inputPlaceName.value, link: inputPlaceImage.value }, '.place-card', handleImageClick);
   placesContainer.prepend(cardElement);
   closePopup(popupAddPlace);
@@ -107,7 +106,7 @@ popups.forEach((popup) => {
   })
 })
 
-buttonEditProfile.addEventListener('click', preparationPopup);
+buttonEditProfile.addEventListener('click', openProfileEditPopup);
 
 initialCards.forEach((item) => {
   const cardElement = createCard(item, '.place-card');
@@ -116,6 +115,9 @@ initialCards.forEach((item) => {
 
 buttonAddPlace.addEventListener('click', function () {
   openPopup(popupAddPlace);
+  placeFormValidator.resetValidation();
+  inputPlaceName.value = "";
+  inputPlaceImage.value = "";
 });
 
 formElementProfile.addEventListener('submit', handleProfileFormSubmit);

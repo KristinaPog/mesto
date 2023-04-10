@@ -24,7 +24,7 @@ export class Card {
     });
   }
 
-  _openImage() {
+  __setImageClickEventListener() {
     const image = this._element.querySelector('.place__image');
     image.addEventListener('click', () => {
       this._handleImageClick(this._name, this._link);
@@ -34,7 +34,7 @@ export class Card {
   _setEventListeners() {
     this._setLikeEventListener();
     this._setDeleteEventListener();
-    this._openImage();
+    this.__setImageClickEventListener();
   }
 
   generateCard() {
