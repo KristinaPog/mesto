@@ -89,7 +89,7 @@ function createCard(cardData, templateSelector) {
 //обработчик отправки формы попапа добавления места
 function handleAddPlaceFormSubmit(event) {
   event.preventDefault();  
-  const cardElement = createCard({ name: inputPlaceName.value, link: inputPlaceImage.value }, '.place-card', handleImageClick);
+  const cardElement = createCard({ name: inputPlaceName.value, link: inputPlaceImage.value }, '.place-card', openImagePopup);
   placesContainer.prepend(cardElement);
   closePopup(popupAddPlace);
   event.target.reset();
