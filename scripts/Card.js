@@ -11,14 +11,16 @@ export class Card {
     return newPlace;
   } 
 
-  _initLikeToggle () { 
-    const like = this._element.querySelector('.like'); 
-    like.addEventListener('click', function(evt){evt.target.classList.toggle('like_active')}); 
+  _setLikeEventListener () { 
+    const buttonLike = this._element.querySelector('.like'); 
+    buttonLike.addEventListener('click', function(evt){evt.target.classList.toggle('like_active')}); 
   } 
 
-  _initDeleteCard() { 
+  _setDeleteEventListener() { 
     const trash = this._element.querySelector ('.trash'); 
-    trash.addEventListener('click', ()=>{this._element.remove()}); 
+    trash.addEventListener('click', ()=>{
+      this._element.remove(); 
+      this._element = null;}); 
   } 
 
   _openImage() {
@@ -29,8 +31,8 @@ export class Card {
   }
 
   _setEventListeners () {
-    this._initLikeToggle(); 
-    this._initDeleteCard(); 
+    this._setLikeEventListener(); 
+    this._setDeleteEventListener(); 
     this._openImage();
   }
 
