@@ -57,9 +57,9 @@ function closePopupByEsc(evt) {
 
 function openProfileEditPopup() {
   openPopup(popupEditProfile);
+  profileFormValidator.resetValidation();
   nameInput.value = profileName.textContent;
   jobInput.value = profileStatus.textContent;
-  profileFormValidator.resetValidation();
 }
 
 // Обработчик «отправки» формы попапа редактирования профиля
