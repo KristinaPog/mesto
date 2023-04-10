@@ -40,6 +40,8 @@ addPlaceValidation.enableValidation();
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupByEsc);
+  editProfileValidation.resetValidation();
+  addPlaceValidation.resetValidation();
 }
 
 //Функции закрытия попапов
