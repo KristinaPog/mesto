@@ -4,6 +4,11 @@ export class Card {
     this._link = cardData.link;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+    this._element = this._getTemplate();
+    this._image = this._element.querySelector('.place__image');
+    this._label = this._element.querySelector('.place__text');
+    this._buttonLike = this._element.querySelector('.like');
+    this._trash = this._element.querySelector('.trash');
   }
 
   _getTemplate() {
@@ -12,21 +17,18 @@ export class Card {
   }
 
   _setLikeEventListener() {
-    const buttonLike = this._element.querySelector('.like');
-    buttonLike.addEventListener('click', function (evt) { evt.target.classList.toggle('like_active') });
+    this._buttonLike.addEventListener('click', function (evt) { evt.target.classList.toggle('like_active') });
   }
 
   _setDeleteEventListener() {
-    const trash = this._element.querySelector('.trash');
-    trash.addEventListener('click', () => {
+    this._trash.addEventListener('click', () => {
       this._element.remove();
       this._element = null;
     });
   }
 
   _setImageClickEventListener() {
-    const image = this._element.querySelector('.place__image');
-    image.addEventListener('click', () => {
+    this._image.addEventListener('click', () => {
       this._handleCardClick(this._name, this._link);
     });
   }
@@ -38,12 +40,9 @@ export class Card {
   }
 
   generateCard() {
-    this._element = this._getTemplate();
-    const image = this._element.querySelector('.place__image');
-    const label = this._element.querySelector('.place__text');
-    image.src = this._link;
-    label.textContent = this._name;
-    image.alt = this._name;
+    this._image.src = this._link;
+    this._label.textContent = this._name;
+    this._image.alt = this._name;
     this._setEventListeners();
     return this._element;
   }

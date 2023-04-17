@@ -5,9 +5,9 @@ export class Section {
     this._renderer = renderer;
   }
 
-  renderingElement(){
+  rendererElements(){
     this._items.forEach((item)=>{
-      this._renderer(item, '.place-card');
+      this._renderer(item);
     });
     
   }
@@ -16,8 +16,3 @@ export class Section {
     this._container.prepend(element);
   }
 }
-
-// initialCards.forEach((item) => {
-//   const cardElement = createCard(item, '.place-card');
-//   placesContainer.prepend(cardElement);
-// });

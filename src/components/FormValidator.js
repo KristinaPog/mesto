@@ -27,7 +27,7 @@ export class FormValidator {
     errorElement.classList.remove(this._errorClass);
   }
 
-  _isValid = (inputElement) => {
+  _toggleInputErrorState = (inputElement) => {
     if (!inputElement.validity.valid) {
       this._showInputError(inputElement, inputElement.validationMessage);
     } else { this._hideInputError(inputElement); }
@@ -73,7 +73,7 @@ export class FormValidator {
     });
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
-        this._isValid(inputElement);
+        this._toggleInputErrorState(inputElement);
         this._toggleButtonState();
       });
     })

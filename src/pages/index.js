@@ -1,5 +1,5 @@
 import './../pages/index.css';
-import { initialCards } from '../scripts/constants.js';
+import { initialCards, validationConfig } from '../scripts/constants.js';
 import { Card } from '../components/Card.js';
 import { Section } from '../components/Section.js';
 import { FormValidator } from '../components/FormValidator.js';
@@ -18,14 +18,6 @@ const formElementProfile = document.forms['editProfileForm'];//форма доб
 const formElementPlace = document.forms['addCardForm']//форма добавления места
 const inputPlaceName = document.querySelector('.popup__input_type_place-name'); //инпут названия места
 const inputPlaceImage = document.querySelector('.popup__input_type_place-image'); //инпут ссылки 
-
-const validationConfig = {
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__submit',
-  inactiveButtonClass: 'popup__submit_inactive',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_active'
-};
 
 const profileFormValidator = new FormValidator(validationConfig, formEditProfile);
 const placeFormValidator = new FormValidator(validationConfig, formAddCard);
@@ -46,11 +38,16 @@ function openProfileEditPopup() {
 }
 
 // Обработчик «отправки» формы попапа редактирования профиля
-function handleProfileFormSubmit(evt) {
-  evt.preventDefault();
-  user.setUserInfo({name: nameInput.value, status: jobInput.value});
-  popupEditProfile.close();
+// function handleProfileFormSubmit(evt) {
+//   evt.preventDefault();
+//   user.setUserInfo({name: nameInput.value, status: jobInput.value});
+//   popupEditProfile.close();
+// }
+
+function handleProfileFormSubmit(name,status) {
+  user.setUserInfo(name,status);
 }
+
 
 const bigImage = new PopupWithImage ('.popup_open-image');
 const handleCardClick = (name, link)=> {
@@ -67,15 +64,13 @@ const createCard = (cardData, templateSelector) => {
 const cards = new Section ({items: initialCards, renderer: (item) =>{
   const newCards = createCard(item, '.place-card');
   cards.addItem(newCards)}}, '.places__list');
-cards.renderingElement();
+cards.rendererElements();
 
 //обработчик отправки формы попапа добавления места
-function handleAddPlaceFormSubmit(event) {
-  event.preventDefault();  
-  const cardElement = createCard({ name: inputPlaceName.value, link: inputPlaceImage.value }, '.place-card', handleCardClick);
+function handleAddPlaceFormSubmit({placeName, placeLink}) {
+  const cardElement = createCard({name: placeName, link: placeLink}, '.place-card', handleCardClick);
   cards.addItem(cardElement);
   popupAddPlace.close();
-  event.target.reset();
 }
 
 popupEditProfile.setEventListeners();
@@ -84,15 +79,11 @@ popupOpenImage.setEventListeners();
 
 buttonEditProfile.addEventListener('click', openProfileEditPopup);
 
-
-
 buttonAddPlace.addEventListener('click', function () {
   popupAddPlace.open();
   placeFormValidator.resetValidation();
-  inputPlaceName.value = "";
-  inputPlaceImage.value = "";
 });
 
-formElementProfile.addEventListener('submit', handleProfileFormSubmit);
-formElementPlace.addEventListener('submit', handleAddPlaceFormSubmit);
+// formElementProfile.addEventListener('submit', handleProfileFormSubmit);
+// formElementPlace.addEventListener('submit', handleAddPlaceFormSubmit);
 
