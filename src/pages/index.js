@@ -14,10 +14,6 @@ const formEditProfile = page.querySelector('.popup__form_edit-profile');
 const formAddCard = page.querySelector('.popup__form_add-card');
 const nameInput = page.querySelector('.popup__input_type_name'); //поле формы редактирования имени
 const jobInput = page.querySelector('.popup__input_type_status'); //поле формы редактирования статуса
-const formElementProfile = document.forms['editProfileForm'];//форма добавления имени и статуса
-const formElementPlace = document.forms['addCardForm']//форма добавления места
-const inputPlaceName = document.querySelector('.popup__input_type_place-name'); //инпут названия места
-const inputPlaceImage = document.querySelector('.popup__input_type_place-image'); //инпут ссылки 
 
 const profileFormValidator = new FormValidator(validationConfig, formEditProfile);
 const placeFormValidator = new FormValidator(validationConfig, formAddCard);
@@ -37,23 +33,14 @@ function openProfileEditPopup() {
   jobInput.value = userInfo.status;
 }
 
-// Обработчик «отправки» формы попапа редактирования профиля
-// function handleProfileFormSubmit(evt) {
-//   evt.preventDefault();
-//   user.setUserInfo({name: nameInput.value, status: jobInput.value});
-//   popupEditProfile.close();
-// }
-
-function handleProfileFormSubmit(name,status) {
-  user.setUserInfo(name,status);
+function handleProfileFormSubmit(userData) {
+  user.setUserInfo(userData);
 }
-
 
 const bigImage = new PopupWithImage ('.popup_open-image');
 const handleCardClick = (name, link)=> {
   bigImage.open(name, link);
 }
-
 
 const createCard = (cardData, templateSelector) => {
   const card = new Card({cardData, handleCardClick}, templateSelector);
@@ -64,7 +51,7 @@ const createCard = (cardData, templateSelector) => {
 const cards = new Section ({items: initialCards, renderer: (item) =>{
   const newCards = createCard(item, '.place-card');
   cards.addItem(newCards)}}, '.places__list');
-cards.rendererElements();
+cards.renderElements();
 
 //обработчик отправки формы попапа добавления места
 function handleAddPlaceFormSubmit({placeName, placeLink}) {
@@ -84,6 +71,4 @@ buttonAddPlace.addEventListener('click', function () {
   placeFormValidator.resetValidation();
 });
 
-// formElementProfile.addEventListener('submit', handleProfileFormSubmit);
-// formElementPlace.addEventListener('submit', handleAddPlaceFormSubmit);
 
