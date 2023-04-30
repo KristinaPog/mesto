@@ -1,0 +1,16 @@
+.profile__avatar-overlay{
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+.profile__avatar-overlay:hover{
+  background-color: rgba(0, 0, 0, 0.5);
+  background-image: url(../../../images/pen.png);
+  background-repeat: no-repeat;
+  background-position: center;
+}

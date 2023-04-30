@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
   <title>Место</title>
 </head>
 
@@ -17,7 +17,10 @@
   <!-- MAIN -->
   <main class="content">
     <section class="profile">
-      <img src="<%=require('./images/avatar-image.jpg')%>" alt="Аватар" class="profile__avatar">
+      <div class="profile__avatar-container">
+        <img src="#" alt="Аватар" class="profile__avatar">
+        <div class="profile__avatar-overlay"></div>
+      </div>
       <div class="profile-info">
         <h1 class="profile-info__name">Жак-Ив Кусто</h1>
         <button class="profile-info__button" id="button" aria-label="Редактировать"> </button>
@@ -44,7 +47,7 @@
         <input type="text" name="name" id="name-input" placeholder="Введите имя"
           class="popup__input popup__input_type_name" required minlength="2" maxlength="40">
         <span class="popup__input-error name-input-error"></span>
-        <input type="text" name="status" id="name-status" placeholder="Введите статус"
+        <input type="text" name="about" id="name-status" placeholder="Введите статус"
           class="popup__input popup__input_type_status" required minlength="2" maxlength="200">
         <span class="popup__input-error name-status-error"></span>
         <button type="submit" name="popupButton" class="popup__submit popup__submit_edit-profile"
@@ -58,10 +61,10 @@
       <button class="popup__close popup__close_add-card" type="button" aria-label="Закрыть"></button>
       <form action="#" name="addCardForm" class="popup__form popup__form_add-card" novalidate>
         <h3 class="popup__title popup__title_add-card">Новое место</h3>
-        <input type="text" name="placeName" value="" placeholder="Название"
-          class="popup__input popup__input_type_place-name" id="place-name" required minlength="2" maxlength="200">
+        <input type="text" name="name" value="" placeholder="Название" class="popup__input popup__input_type_place-name"
+          id="place-name" required minlength="2" maxlength="200">
         <span class="popup__input-error place-name-error"></span>
-        <input type="url" name="placeLink" value="" placeholder="Ссылка на картинку"
+        <input type="url" name="link" value="" placeholder="Ссылка на картинку"
           class="popup__input popup__input_type_place-image" id="place-image" required minlength="2" maxlength="200">
         <span class="popup__input-error place-image-error"></span>
         <button type="submit" name="popupButton" class="popup__submit popup__submit_add-card"
@@ -75,6 +78,29 @@
       <img src="#" alt="" class="popup__image">
       <p class="popup__text"></p>
       <button class="popup__close popup__close_open-image" type="button" aria-label="Закрыть"></button>
+    </div>
+  </div>
+
+  <div class="popup popup_warning">
+    <div class="popup__container popup__container_warning">
+      <p class="popup__title popup__title_warning">Вы уверены?</p>
+      <button type="submit" name="popupButton" class="popup__submit popup__submit_warning"
+        aria-label="Сохранить изменения">Да</button>
+      <button class="popup__close" type="button" aria-label="Закрыть"></button>
+    </div>
+  </div>
+
+  <div class="popup popup_edit-avatar">
+    <div class="popup__container popup__container_edit-avatar">
+      <form action="#" name="editAvatar" class="popup__form popup__form_edit-avatar" novalidate>
+        <p class="popup__title popup__title_edit-avatar">Обновить аватар</p>
+        <input type="url" name="avatar" value="" placeholder="Вставьте ссылку на новый аватар"
+          class="popup__input popup__input_type_avatar-link" id="avatar" required minlength="2" maxlength="200">
+          <span class="popup__input-error avatar-error"></span>
+        <button type="submit" name="popupButton" class="popup__submit popup__submit_edit-avatar"
+          aria-label="Сохранить изменения">Сохранить</button>
+      </form>
+      <button class="popup__close" type="button" aria-label="Закрыть"></button>
     </div>
   </div>
 
