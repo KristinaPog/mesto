@@ -7,7 +7,6 @@ export class Section {
   renderElements(data, userId){
     data.forEach((item)=>{
       this._renderer(item, userId);
-      // this._userId = userId
     });
   }
 

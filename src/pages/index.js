@@ -1,5 +1,5 @@
 import './../pages/index.css';
-import { validationConfig } from '../scripts/constants.js';
+import { validationConfig } from '../utils/constants.js';
 import { Card } from '../components/Card.js';
 import { Section } from '../components/Section.js';
 import { FormValidator } from '../components/FormValidator.js';
@@ -56,11 +56,13 @@ function openProfileEditPopup() {
 }
 
 function handleProfileFormSubmit(userData) {
+  popupEditProfile.saveLoading(true);
   api.setUserInfo(userData)
     .then((res) => {
       user.setUserInfo(res)
     })
-    .catch((error) => { console.log(`Ошибка: ${error}`) });
+    .catch((error) => { console.log(`Ошибка: ${error}`) })
+    .finally(() => { popupEditProfile.saveLoading(false); })
 }
 
 function handleEditAvatarFormSubmit(userData) {
@@ -126,14 +128,18 @@ buttonAddPlace.addEventListener('click', function () {
   placeFormValidator.resetValidation();
 });
 
-//обработчик отправки формы попапа добавления места
 function handleAddPlaceFormSubmit(data) {
-  api.setNewCard(data).then((res) => {
-    const cardElement = createCard(res, userId, '.place-card');
-    return cards.addItem(cardElement);
-  });
-
-  popupAddPlace.close();
+  popupAddPlace.saveLoading(true);
+  api.setNewCard(data)
+    .then((res) => {
+      const cardElement = createCard(res, userId, '.place-card');
+      return cards.addItem(cardElement);
+    })
+    .catch((error) => { console.log(`Ошибка: ${error}`) })
+    .finally(() => { popupAddPlace.saveLoading(false); 
+      popupAddPlace.close();
+    })
+  
 }
 
 popupEditProfile.setEventListeners();
@@ -143,7 +149,6 @@ popupEditAvatar.setEventListeners();
 popupWarning.setEventListeners();
 
 buttonEditProfile.addEventListener('click', openProfileEditPopup);
-
 avatarContainer.addEventListener('click', function () { popupEditAvatar.open() });
 
 

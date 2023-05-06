@@ -3,8 +3,7 @@ import {Popup} from "./Popup.js";
 export class PopupWithConfirmation extends Popup{
   constructor(popupSelector){
     super(popupSelector);
-    this._submit = this._popup.querySelector('.popup__submit_warning');
-    
+    this._submit = this._popup.querySelector('.popup__submit_warning');   
   }
 
   deleteCard(action){

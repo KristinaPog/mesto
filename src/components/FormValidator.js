@@ -10,8 +10,6 @@ export class FormValidator {
     this._inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
   }
 
-
-  // функция добавляет класс со стилями инпутов при ошибке
   _showInputError = (inputElement, errorMessage) => {
     const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.add(this._inputErrorClass);
@@ -19,7 +17,6 @@ export class FormValidator {
     errorElement.classList.add(this._errorClass);
   }
 
-  //функция удаляет класс со стилями инпутов при ошибке
   _hideInputError = (inputElement) => {
     const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.remove(this._inputErrorClass);
@@ -35,7 +32,6 @@ export class FormValidator {
 
   _hasInvalidInput = () => {
     return this._inputList.some((inputElement) => {
-      // Если поле не валидно, колбэк вернёт true, обход массива прекратится и вся функция hasInvalidInput вернёт true
       return !inputElement.validity.valid;
     })
   }

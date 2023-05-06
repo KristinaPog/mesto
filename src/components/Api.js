@@ -32,7 +32,6 @@ export class Api {
         name: cardData.name,
         link: cardData.link
       })
-
     }).then(this._checkingTheServerResponse)
   }
 
@@ -44,7 +43,6 @@ export class Api {
       }
     })
       .then(this._checkingTheServerResponse)
-
   }
 
   setUserInfo(userInfo) {
@@ -105,9 +103,7 @@ export class Api {
         authorization: this._user,
         'Content-Type': 'application/json'
       }
-
     })
       .then(this._checkingTheServerResponse)
-
   }
 }
