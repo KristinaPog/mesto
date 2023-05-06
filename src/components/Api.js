@@ -1,11 +1,11 @@
 export class Api {
-  constructor(userID, url){
+  constructor(userID, url) {
     this._user = userID;
     this._url = url;
   }
 
-  _checkingTheServerResponse(res){
-    if (res.ok){
+  _checkingTheServerResponse(res) {
+    if (res.ok) {
       return res.json();
     }
     else return Promise.reject(`Ошибка: ${res.status}`);
@@ -19,7 +19,6 @@ export class Api {
       }
     })
       .then(this._checkingTheServerResponse)
-
   }
 
   setNewCard(cardData) {
@@ -60,10 +59,10 @@ export class Api {
         about: userInfo.about
       })
     })
-    .then(this._checkingTheServerResponse)
+      .then(this._checkingTheServerResponse)
   }
 
-  setAvatar(userInfo){
+  setAvatar(userInfo) {
     return fetch(`${this._url}users/me/avatar `, {
       method: "PATCH",
       headers: {
@@ -73,6 +72,42 @@ export class Api {
       body: JSON.stringify({
         avatar: userInfo.avatar
       })
+    })
+      .then(this._checkingTheServerResponse)
+  }
 
-    }).then(this._checkingTheServerResponse)}
+  setLike(cardId) {
+    return fetch(`${this._url}cards/${cardId}/likes`, {
+      method: "PUT",
+      headers: {
+        authorization: this._user,
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(this._checkingTheServerResponse)
+  }
+
+  deleteLike(cardId) {
+    return fetch(`${this._url}cards/${cardId}/likes`, {
+      method: "DELETE",
+      headers: {
+        authorization: this._user,
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(this._checkingTheServerResponse)
+  }
+
+  deleteCard(cardId) {
+    return fetch(`${this._url}cards/${cardId} `, {
+      method: "DELETE",
+      headers: {
+        authorization: this._user,
+        'Content-Type': 'application/json'
+      }
+
+    })
+      .then(this._checkingTheServerResponse)
+
+  }
 }

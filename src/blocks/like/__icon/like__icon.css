@@ -1,0 +1,17 @@
+.like__icon {
+  background-color: inherit;
+  background-image: url(../../../images/like.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: none;
+  width: 21px;
+  height: 19px;
+  -ms-flex-item-align: center;
+  -ms-grid-row-align: center;
+  align-self: center;
+  cursor: pointer;
+}
+
+.like__icon:hover {
+  opacity: 0.5;
+}

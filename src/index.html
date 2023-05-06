@@ -96,7 +96,7 @@
         <p class="popup__title popup__title_edit-avatar">Обновить аватар</p>
         <input type="url" name="avatar" value="" placeholder="Вставьте ссылку на новый аватар"
           class="popup__input popup__input_type_avatar-link" id="avatar" required minlength="2" maxlength="200">
-          <span class="popup__input-error avatar-error"></span>
+        <span class="popup__input-error avatar-error"></span>
         <button type="submit" name="popupButton" class="popup__submit popup__submit_edit-avatar"
           aria-label="Сохранить изменения">Сохранить</button>
       </form>
@@ -109,7 +109,10 @@
       <img class="place__image">
       <div class="place__label">
         <h2 class="place__text"></h2>
-        <button type="button" class="like" aria-label="Поставить лайк"></button>
+        <div class="like">
+          <button type="button" class="like__icon" aria-label="Поставить лайк"></button>
+          <p class="like__quantity">0</p>
+        </div>
       </div>
       <button type="button" class="trash"></button>
     </li>
