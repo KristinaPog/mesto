@@ -1,5 +1,4 @@
 import './../pages/index.css';
-import { validationConfig } from '../utils/constants.js';
 import { Card } from '../components/Card.js';
 import { Section } from '../components/Section.js';
 import { FormValidator } from '../components/FormValidator.js';
@@ -9,17 +8,7 @@ import { UserInfo } from '../components/UserInfo';
 import { Api } from '../components/Api';
 import { PopupWithConfirmation } from '../components/PopupWithConfirmation';
 import { data } from 'autoprefixer';
-
-const page = document.querySelector('.page');
-const buttonEditProfile = page.querySelector('.profile-info__button'); // кнопка редактирования данных пользователя
-const buttonAddPlace = page.querySelector('.profile__button'); //находим кнопку добавления нового места
-const formEditProfile = page.querySelector('.popup__form_edit-profile');
-const formAddCard = page.querySelector('.popup__form_add-card');
-const nameInput = page.querySelector('.popup__input_type_name'); //поле формы редактирования имени
-const jobInput = page.querySelector('.popup__input_type_status'); //поле формы редактирования статуса
-const avatar = page.querySelector('.profile__avatar'); //аватар
-const avatarContainer = page.querySelector('.profile__avatar-container');
-const formEditAvatar = page.querySelector('.popup__form_edit-avatar');
+import { validationConfig, buttonEditProfile, buttonAddPlace, formEditProfile, formAddCard, nameInput, jobInput, avatar, avatarContainer, formEditAvatar } from '../utils/constants.js';
 
 const user = new UserInfo({ nameSelector: '.profile-info__name', statusSelector: '.profile-info__status', avatarSelector: '.profile__avatar' });
 const popupEditProfile = new PopupWithForm('.popup_edit-profile', handleProfileFormSubmit);
@@ -42,7 +31,6 @@ Promise.all([api.getInitialCards(), api.getUserInfo()])
     userId = userData._id;
     cards.renderElements(data, userId);
     user.setUserInfo(userData);
-    avatar.src = userData.avatar;
   })
   .catch((error) => { console.log(`Ошибка: ${error}`) });
 
@@ -119,7 +107,7 @@ const createCard = (cardData, userId, templateSelector) => {
 const cards = new Section({
   renderer: (item, userId) => {
     const newCards = createCard(item, userId, '.place-card');
-    cards.addItem(newCards)
+    cards.addItem(newCards, 'append')
   }
 }, '.places__list');
 
@@ -133,13 +121,13 @@ function handleAddPlaceFormSubmit(data) {
   api.setNewCard(data)
     .then((res) => {
       const cardElement = createCard(res, userId, '.place-card');
-      return cards.addItem(cardElement);
+      return cards.addItem(cardElement, 'prepend');
     })
     .catch((error) => { console.log(`Ошибка: ${error}`) })
-    .finally(() => { popupAddPlace.saveLoading(false); 
+    .finally(() => {
+      popupAddPlace.saveLoading(false);
       popupAddPlace.close();
     })
-  
 }
 
 popupEditProfile.setEventListeners();

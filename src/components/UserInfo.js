@@ -9,6 +9,7 @@ export class UserInfo {
     const profile = {
       name: this._name.textContent,
       about: this._status.textContent,
+      avatar: this._avatar.src
     };
     return profile;
   };
