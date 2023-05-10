@@ -47,16 +47,19 @@ function handleProfileFormSubmit(userData) {
   popupEditProfile.saveLoading(true);
   api.setUserInfo(userData)
     .then((res) => {
-      user.setUserInfo(res)
+      user.setUserInfo(res);
+      popupEditProfile.saveLoading(false);
+      popupEditProfile.close();
     })
     .catch((error) => { console.log(`Ошибка: ${error}`) })
-    .finally(() => { popupEditProfile.saveLoading(false); })
+  
 }
 
 function handleEditAvatarFormSubmit(userData) {
   api.setAvatar(userData)
     .then((res) => {
       user.setUserInfo(res);
+      popupEditAvatar.close();
     })
     .catch((error) => { console.log(`Ошибка: ${error}`) })
 }
@@ -121,13 +124,11 @@ function handleAddPlaceFormSubmit(data) {
   api.setNewCard(data)
     .then((res) => {
       const cardElement = createCard(res, userId, '.place-card');
+      popupAddPlace.saveLoading(false);
+      popupAddPlace.close();
       return cards.addItem(cardElement, 'prepend');
     })
     .catch((error) => { console.log(`Ошибка: ${error}`) })
-    .finally(() => {
-      popupAddPlace.saveLoading(false);
-      popupAddPlace.close();
-    })
 }
 
 popupEditProfile.setEventListeners();

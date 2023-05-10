@@ -2,3 +2,10 @@
   right: -8px;
   top: -8px;
 }
+
+@media (max-width: 580px){
+  .popup__close_open-image {
+    right: 24px;
+    top: -8px;
+  }
+}
