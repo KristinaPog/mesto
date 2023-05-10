@@ -28,8 +28,8 @@ let userId;
 
 Promise.all([api.getInitialCards(), api.getUserInfo()])
   .then(([data, userData]) => {
-    userId = userData._id;
-    cards.renderElements(data, userId);
+    userId = userData._id; //вот
+    cards.renderElements(data, userId); //вот
     user.setUserInfo(userData);
   })
   .catch((error) => { console.log(`Ошибка: ${error}`) });
@@ -48,20 +48,22 @@ function handleProfileFormSubmit(userData) {
   api.setUserInfo(userData)
     .then((res) => {
       user.setUserInfo(res);
-      popupEditProfile.saveLoading(false);
       popupEditProfile.close();
     })
     .catch((error) => { console.log(`Ошибка: ${error}`) })
+    .finally(()=>{popupEditProfile.saveLoading(false)})
   
 }
 
 function handleEditAvatarFormSubmit(userData) {
+  popupEditAvatar.saveLoading(true);
   api.setAvatar(userData)
     .then((res) => {
       user.setUserInfo(res);
       popupEditAvatar.close();
     })
     .catch((error) => { console.log(`Ошибка: ${error}`) })
+    .finally(()=>{popupEditAvatar.saveLoading(false)})
 }
 
 const handleCardClick = (name, link) => {
@@ -71,7 +73,7 @@ const handleCardClick = (name, link) => {
 const createCard = (cardData, userId, templateSelector) => {
   const card = new Card({
     cardData: cardData,
-    userId: userId,
+    userId: userId, //вот
     handleCardClick: handleCardClick,
     handleLikeClick: (card) => {
       if (card.isLiked()) {
@@ -107,9 +109,9 @@ const createCard = (cardData, userId, templateSelector) => {
   return cardElement;
 }
 
-const cards = new Section({
+const cards = new Section({ //вот
   renderer: (item, userId) => {
-    const newCards = createCard(item, userId, '.place-card');
+    const newCards = createCard(item, userId, '.place-card'); //вот
     cards.addItem(newCards, 'append')
   }
 }, '.places__list');
@@ -124,11 +126,11 @@ function handleAddPlaceFormSubmit(data) {
   api.setNewCard(data)
     .then((res) => {
       const cardElement = createCard(res, userId, '.place-card');
-      popupAddPlace.saveLoading(false);
       popupAddPlace.close();
       return cards.addItem(cardElement, 'prepend');
     })
     .catch((error) => { console.log(`Ошибка: ${error}`) })
+    .finally(()=>{popupAddPlace.saveLoading(false); })
 }
 
 popupEditProfile.setEventListeners();
